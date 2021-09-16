@@ -6,7 +6,7 @@ const { eachMessage } = require('./handler');
 const clientId = process.env.SERVICE_NAME || 'ingester';
 
 const kafka = new Kafka({
-  logLevel: 0,
+  logLevel: 0, // disable logging
   clientId,
   brokers: (process.env.KAFKA_BROKERS || '').replace(/\s/, '').split(','),
 });

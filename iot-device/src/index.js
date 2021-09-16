@@ -11,13 +11,7 @@ const Payload = root.lookupType('device.Payload');
 const clientId = getName();
 
 const kafka = new Kafka({
-  // logLevel: logger.level,
-  // logCreator: level => {
-  //   const kafkaLogger = logger.child({ module: 'kafka' });
-  //   kafkaLogger.level = level;
-
-  //   return kafkaLogger;
-  // },
+  logLevel: 0, // disable logging
   clientId,
   brokers: (process.env.KAFKA_BROKERS || '').replace(/\s/, '').split(','),
 });
