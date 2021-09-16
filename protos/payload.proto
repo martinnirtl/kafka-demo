@@ -1,0 +1,16 @@
+package device;
+syntax = "proto3";
+
+message Payload {
+  enum Status {
+    OK = 0;
+    NOT_OK = 1;
+  }
+
+  string device = 1;
+  float cpu = 1;
+  float cpu_temp = 1;
+  float memory = 1;
+  Status status = 1;
+  int32 timestamp = 1;
+}

@@ -1,0 +1,34 @@
+version: '2'
+
+networks:
+  kafka:
+    name: kafka
+
+services:
+  iot-device:
+    image: iot-device:local
+    build: iot-device
+    environment:
+      - LOG_LEVEL=debug
+      - LOG_PRETTY=true
+      - SERVICE_NAME=device_0x4F7A
+      - KAFKA_BROKERS=kafka-1:9092,kafka-2:9092,kafka-3:9092
+      - KAFKA_TOPIC=iot.devices.metrics
+      - INTERVAL=60000
+    networks:
+      - kafka
+
+  metrics-ingester:
+    image: metrics-ingester:local
+    build: metrics-ingester
+    environment:
+      - LOG_LEVEL=debug
+      - LOG_PRETTY=true
+      - SERVICE_NAME=ingester_0
+      - KAFKA_BROKERS=kafka-1:9092,kafka-2:9092,kafka-3:9092
+      - KAFKA_TOPIC=iot.devices.metrics
+      - KAFKA_CONSUMER_GROUP_ID=iot.devices.metric-ingesters
+      - DT_TENANT_BASE_URL
+      - DT_API_TOKEN
+    networks:
+      - kafka
