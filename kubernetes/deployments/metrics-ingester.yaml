@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: metrics-ingester
+  name: metrics-ingester
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metrics-ingester
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: metrics-ingester
+    spec:
+      containers:
+        - image: metrics-ingester:local
+          name: metrics-ingester
+          resources: {}
+          envFrom:
+            - configMapRef:
+                name: metrics-ingester-config

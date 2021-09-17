@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: iot-device
+  name: iot-device
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iot-device
+  template:
+    metadata:
+      labels:
+        app: iot-device
+    spec:
+      containers:
+        - name: iot-device
+          image: iot-device:local
+          resources: {}
+          envFrom:
+            - configMapRef:
+                name: iot-device-config
