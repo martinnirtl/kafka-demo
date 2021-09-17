@@ -16,7 +16,7 @@ spec:
         app: metrics-ingester
     spec:
       containers:
-        - image: metrics-ingester:local
+        - image: martinnirtl/demos.kafka.metrics-ingester:latest
           name: metrics-ingester
           resources: {}
           envFrom:

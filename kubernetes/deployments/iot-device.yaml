@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: iot-device
-          image: iot-device:local
+          image: martinnirtl/demos.kafka.iot-device:latest
           resources: {}
           envFrom:
             - configMapRef:
