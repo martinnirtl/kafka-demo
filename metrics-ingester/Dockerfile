@@ -6,10 +6,10 @@ COPY package*.json ./
 
 RUN npm install --only=prod
 
-COPY . .
+COPY ./metrics-ingester .
+COPY ./protos ./protos
 
 ENV NODE_ENV production
-ENV SERVICE_NAME backend
 
 # NOTE enables graceful shutdown > https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86
 ENTRYPOINT ["node", "src/index.js"]

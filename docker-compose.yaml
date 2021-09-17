@@ -7,7 +7,10 @@ networks:
 services:
   iot-device:
     image: iot-device:local
-    build: iot-device
+    build:
+      context: .
+      dockerfile: iot-device/Dockerfile
+    entrypoint: ['tail', '-f', '/dev/null']
     environment:
       - LOG_LEVEL=debug
       - SERVICE_NAME=device_0x4F7A
@@ -19,7 +22,10 @@ services:
 
   metrics-ingester:
     image: metrics-ingester:local
-    build: metrics-ingester
+    build:
+      context: .
+      dockerfile: metrics-ingester/Dockerfile
+    entrypoint: ['tail', '-f', '/dev/null']
     environment:
       - LOG_LEVEL=debug
       - SERVICE_NAME=ingester_0
