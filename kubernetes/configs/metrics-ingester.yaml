@@ -4,6 +4,6 @@ metadata:
   name: iot-device-config
 data:
   LOG_LEVEL: debug
-  KAFKA_BROKERS: kafka-1:9092,kafka-2:9092,kafka-3:9092
+  KAFKA_BROKERS: default-kafka:9092
   KAFKA_TOPIC: iot.devices.metrics
   KAFKA_CONSUMER_GROUP_ID: iot.devices.metric-ingesters
