@@ -17,7 +17,7 @@ const transform = ({ device, cpu, cpuTemp, memory, status, timestamp }) => {
   return payload;
 };
 
-exports.eachMessage = async ({ topic, partition, message }) => {
+exports.eachMessage = async function ({ topic, partition, message }) {
   logger.info(`message received on ${topic} via partition ${partition}`);
 
   const payload = Payload.decode(message.value);
