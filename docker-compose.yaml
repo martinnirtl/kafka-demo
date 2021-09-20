@@ -10,7 +10,7 @@ services:
     build:
       context: .
       dockerfile: iot-device/Dockerfile
-    entrypoint: ['tail', '-f', '/dev/null']
+    # entrypoint: ['tail', '-f', '/dev/null']
     environment:
       - LOG_LEVEL=debug
       - SERVICE_NAME=device_0x4F7A
@@ -25,7 +25,7 @@ services:
     build:
       context: .
       dockerfile: metrics-ingester/Dockerfile
-    entrypoint: ['tail', '-f', '/dev/null']
+    # entrypoint: ['tail', '-f', '/dev/null']
     environment:
       - LOG_LEVEL=debug
       - SERVICE_NAME=ingester_0
