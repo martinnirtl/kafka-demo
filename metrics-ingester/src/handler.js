@@ -17,23 +17,20 @@ const transform = ({ device, cpu, cpuTemp, memory, status, timestamp }) => {
   return payload;
 };
 
-exports.eachMessage = async function ({ topic, partition, message }) {
+exports.eachMessage = function ({ topic, partition, message }) {
   logger.info(`message received on ${topic} via partition ${partition}`);
 
   const payload = Payload.decode(message.value);
   const ingest = transform(payload).join('\n');
 
-  try {
-    logger.debug({ ingest }, 'ingesting metrics...');
-    const { data } = await axios.post(`${process.env.DT_TENANT_BASE_URL}/api/v2/metrics/ingest`, ingest, {
+  logger.debug({ ingest }, 'ingesting metrics...');
+  axios
+    .post(`${process.env.DT_TENANT_BASE_URL}/api/v2/metrics/ingest`, ingest, {
       headers: {
         'content-type': 'text/plain',
         Authorization: `Api-Token ${process.env.DT_API_TOKEN}`,
       },
-    });
-
-    logger.info(data);
-  } catch (error) {
-    logger.error(error);
-  }
+    })
+    .then(({ data }) => logger.info(data))
+    .catch(logger.error);
 };
